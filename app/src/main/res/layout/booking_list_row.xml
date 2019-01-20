@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView style="@style/CardViewStyle"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/depart"
+            style="@style/TextCardViewBold"
+            android:drawableStart="@drawable/ic_location_on_black_24dp"
+            android:drawablePadding="8dp"
+            android:text="Départ de Douala. 21/04/2019" />
+
+        <TextView
+            android:drawableStart="@drawable/ic_location_on_black_24dp"
+            android:drawablePadding="8dp"
+            android:id="@+id/arrive"
+            style="@style/TextCardViewBold"
+            android:text="Retour à Douala. 28/04/2019" />
+
+        <TextView
+            android:drawableStart="@drawable/ic_date_range_black_24dp"
+            android:drawablePadding="8dp"
+            android:id="@+id/duree"
+            style="@style/TextCardViewBold"
+            android:text="Durée location. 7 jours" />
+
+        <TextView
+            android:drawableStart="@drawable/ic_directions_car_black_24dp"
+            android:drawablePadding="8dp"
+            android:id="@+id/car"
+            style="@style/TextCardViewBold"
+            android:text="TOYOTA NS" />
+
+        <TextView
+            android:drawableStart="@drawable/ic_account_circle_black_24dp"
+            android:drawablePadding="8dp"
+            android:id="@+id/driver"
+            style="@style/TextCardViewBold"
+            android:text="Boris Tiomo" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

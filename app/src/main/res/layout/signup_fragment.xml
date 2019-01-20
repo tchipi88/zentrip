@@ -6,7 +6,8 @@
     android:orientation="vertical"
     android:paddingLeft="24dp"
     android:paddingTop="56dp"
-    android:paddingRight="24dp">
+    android:paddingRight="24dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <!--  Barre de progression -->
     <ProgressBar

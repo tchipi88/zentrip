@@ -43,4 +43,7 @@ public interface ZentripDao {
 
     @Query("SELECT * FROM Car  limit :size  offset :page")
     LiveData<List<Car>> findAllCars(Integer page, Integer size);
+
+    @Query("SELECT * FROM Booking  limit :size  offset :page")
+    LiveData<List<Booking>> findAllBookings(Integer page, Integer size);
 }

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.ganeo.appli.zentrip.R;
 import com.ganeo.appli.zentrip.adapter.CarListAdapter;
+import com.ganeo.appli.zentrip.model.Booking;
 import com.ganeo.appli.zentrip.model.Car;
 import com.ganeo.appli.zentrip.viewmodel.BookingViewModel;
 
@@ -161,6 +162,11 @@ public class BookingCarFragment extends BaseViewModelFragment<BookingViewModel> 
 
 
         viewModel.loadCars(currentPage, PAGE_SIZE).observe(this, loadInitialCarsObserver);
+
+
+        for(Car car:Car.populateData()){
+            carListAdapter.add(car);
+        }
     }
 
 
@@ -194,9 +200,12 @@ public class BookingCarFragment extends BaseViewModelFragment<BookingViewModel> 
 
     @Override
     public void onItemClick(int position, View view) {
-        Car Car = carListAdapter.getItem(position);
-        if (Car != null) {
-            //TODO set car
+        Car car = carListAdapter.getItem(position);
+        if (car != null) {
+            Booking booking=viewModel.getBookingObservable().getValue();
+            booking.carId=car.id;
+            viewModel.setBooking(booking);
+            viewModel.setCar(car);
             NavHostFragment.findNavController(BookingCarFragment.this).navigate(R.id.action_bookingCarFragment_to_bookingDriverFragment);
         }
     }

@@ -1,7 +1,6 @@
 package com.ganeo.appli.zentrip.di.module;
 
 
-import com.ganeo.appli.zentrip.viewmodel.BookingListViewModel;
 import com.ganeo.appli.zentrip.viewmodel.BookingViewModel;
 import com.ganeo.appli.zentrip.viewmodel.ViewModelFactory;
 
@@ -20,12 +19,6 @@ public abstract class ViewModelModule {
     @ViewModelKey(BookingViewModel.class)
     @SuppressWarnings("unused")
     abstract ViewModel bindsSearchViewModel(BookingViewModel bookingViewModel);
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(BookingListViewModel.class)
-    @SuppressWarnings("unused")
-    abstract ViewModel bindsBookingsViewModel(BookingListViewModel bookingListViewModel);
 
 
     @Binds

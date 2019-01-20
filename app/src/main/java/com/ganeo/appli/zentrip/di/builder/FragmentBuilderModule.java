@@ -3,6 +3,7 @@ package com.ganeo.appli.zentrip.di.builder;
 
 import com.ganeo.appli.zentrip.fragment.AccountFragment;
 import com.ganeo.appli.zentrip.fragment.BookingCarFragment;
+import com.ganeo.appli.zentrip.fragment.BookingConfirmationFragment;
 import com.ganeo.appli.zentrip.fragment.BookingDriverFragment;
 import com.ganeo.appli.zentrip.fragment.BookingFragment;
 import com.ganeo.appli.zentrip.fragment.BookingListFragment;
@@ -27,6 +28,9 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract BookingDriverFragment bookingDriverFragment();
+
+    @ContributesAndroidInjector
+    abstract BookingConfirmationFragment bookingConfirmationFragment();
 
     @ContributesAndroidInjector
     abstract MoreFragment moreFragment();

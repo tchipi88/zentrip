@@ -28,4 +28,13 @@ public class Town extends SynchronizedEntity {
     }
 
 
+    public static String[] populate() {
+
+        return new String[]{
+                "Yaounde",
+                "Douala",
+                "Bafoussam"
+        };
+    }
+
 }

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,8 +19,8 @@
 
 
         <TextView
-            style="@style/TextCardViewBold"
-            android:text="" />
+            style="@style/TextCardView"
+            android:text="Selectionnez vos dates" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -79,6 +81,9 @@
             </androidx.cardview.widget.CardView>
         </LinearLayout>
 
+        <TextView
+            style="@style/TextCardView"
+            android:text="Selectionnez vos trajets" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"

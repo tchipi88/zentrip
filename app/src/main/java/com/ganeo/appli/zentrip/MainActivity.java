@@ -72,13 +72,19 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.navigation_search:
-                navController.navigate(R.id.action_global_searchFragment);
+                navController.navigate(R.id.action_global_bookingFragment);
                 break;
             case R.id.navigation_bookings:
-                navController.navigate(R.id.action_global_bookingsFragment);
+                if (prefsManager.isLogged())
+                    navController.navigate(R.id.action_global_bookingsFragment);
+                else
+                    navController.navigate(R.id.action_global_loginFragment);
                 break;
             case R.id.navigation_account:
-                navController.navigate(R.id.action_global_accountFragment);
+                if (prefsManager.isLogged())
+                    navController.navigate(R.id.action_global_accountFragment);
+                else
+                    navController.navigate(R.id.action_global_loginFragment);
                 break;
             case R.id.navigation_more:
                 navController.navigate(R.id.action_global_moreFragment);

@@ -1,6 +1,7 @@
 package com.ganeo.appli.zentrip.repository;
 
 import com.ganeo.appli.zentrip.dao.ZentripDao;
+import com.ganeo.appli.zentrip.model.Booking;
 import com.ganeo.appli.zentrip.model.Car;
 import com.ganeo.appli.zentrip.model.Driver;
 
@@ -29,5 +30,13 @@ public class ZentripRepository {
 
     public LiveData<List<Car>> loadCars(int currentPage, int pageSize) {
         return dao.findAllCars(currentPage, pageSize);
+    }
+
+    public LiveData<List<Booking>> loadBookings(int currentPage, int pageSize) {
+        return dao.findAllBookings(currentPage, pageSize);
+    }
+
+    public void addBooking(Booking booking) {
+        dao.insert(booking);
     }
 }

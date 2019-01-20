@@ -10,12 +10,15 @@ import android.widget.TextView;
 
 import com.ganeo.appli.zentrip.R;
 import com.ganeo.appli.zentrip.adapter.DriverListAdapter;
+import com.ganeo.appli.zentrip.model.Booking;
+import com.ganeo.appli.zentrip.model.Car;
 import com.ganeo.appli.zentrip.model.Driver;
 import com.ganeo.appli.zentrip.viewmodel.BookingViewModel;
 
 import java.util.List;
 
 import androidx.lifecycle.Observer;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -159,6 +162,10 @@ public class BookingDriverFragment extends BaseViewModelFragment<BookingViewMode
 
 
         viewModel.loadDrivers(currentPage, PAGE_SIZE).observe(this, loadInitialDriversObserver);
+
+        for(Driver driver:Driver.populateData()){
+            driverListAdapter.add(driver);
+        }
     }
 
 
@@ -192,9 +199,13 @@ public class BookingDriverFragment extends BaseViewModelFragment<BookingViewMode
 
     @Override
     public void onItemClick(int position, View view) {
-        Driver Driver = driverListAdapter.getItem(position);
-        if (Driver != null) {
-            //TODO set Driver
+        Driver driver = driverListAdapter.getItem(position);
+        if (driver != null) {
+            Booking booking=viewModel.getBookingObservable().getValue();
+            booking.driverId=driver.id;
+            viewModel.setBooking(booking);
+            viewModel.setDriver(driver);
+            NavHostFragment.findNavController(BookingDriverFragment.this).navigate(R.id.action_bookingDriverFragment_to_bookingConfirmationFragment);
         }
     }
 

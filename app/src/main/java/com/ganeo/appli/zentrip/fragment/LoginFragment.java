@@ -17,6 +17,7 @@ import com.ganeo.appli.zentrip.dto.User;
 import com.ganeo.appli.zentrip.model.enumeration.Profil;
 import com.ganeo.appli.zentrip.preference.PrefsManager_;
 
+import androidx.navigation.fragment.NavHostFragment;
 import butterknife.Bind;
 import butterknife.OnClick;
 
@@ -124,7 +125,7 @@ public class LoginFragment extends BaseFragment {
             focusView.requestFocus();
         } else {
             // On affiche un indicateur de progression et on lance une tâche en arrière-plan pour effectuer la tentative de connexion
-            showLoading(true);
+          //tODO  showLoading(true);
             final PrefsManager_ prefs = PrefsManager_.getInstance_(getContext());
             prefs.setLogged(true);
             User user = new User();
@@ -132,6 +133,8 @@ public class LoginFragment extends BaseFragment {
             user.setProfil(Profil.ROLE_USER);
             user.setEmail(username);
             prefs.setCurrentUser(user);
+
+            NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.action_global_accountFragment);
            /*
             LogUtils.debug(LoginFragment.class, "Authentification réussie");
             Call tokenRequestCall = userApi.getAccessToken(username, password);

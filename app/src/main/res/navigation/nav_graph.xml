@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/BookingFragment">
+    app:startDestination="@id/booking">
 
     <fragment
         android:id="@+id/moreFragment"
@@ -30,7 +30,7 @@
         android:id="@+id/action_global_loginFragment"
         app:destination="@id/loginFragment" />
     <action
-        android:id="@+id/action_global_searchFragment"
+        android:id="@+id/action_global_bookingFragment"
         app:destination="@id/booking" />
 
     <fragment
@@ -63,7 +63,16 @@
         <fragment
             android:id="@+id/bookingDriverFragment"
             android:name="com.ganeo.appli.zentrip.fragment.BookingDriverFragment"
-            android:label="Select Driver" />
+            android:label="Select Driver" >
+            <action
+                android:id="@+id/action_bookingDriverFragment_to_bookingConfirmationFragment"
+                app:destination="@id/bookingConfirmationFragment"
+                app:popUpTo="@+id/BookingFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/bookingConfirmationFragment"
+            android:name="com.ganeo.appli.zentrip.fragment.BookingConfirmationFragment"
+            android:label="Booking Confirmation" />
     </navigation>
 
 </navigation>
