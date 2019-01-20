@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/BookingFragment">
+
+    <fragment
+        android:id="@+id/moreFragment"
+        android:name="com.ganeo.appli.zentrip.fragment.MoreFragment"
+        android:label="More" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.ganeo.appli.zentrip.fragment.LoginFragment"
+        android:label="@string/sign_in" />
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.ganeo.appli.zentrip.fragment.AccountFragment"
+        android:label="@string/account" />
+    <action
+        android:id="@+id/action_global_moreFragment"
+        app:destination="@id/moreFragment" />
+    <action
+        android:id="@+id/action_global_bookingsFragment"
+        app:destination="@id/bookingListFragment" />
+    <action
+        android:id="@+id/action_global_accountFragment"
+        app:destination="@id/accountFragment" />
+    <action
+        android:id="@+id/action_global_loginFragment"
+        app:destination="@id/loginFragment" />
+    <action
+        android:id="@+id/action_global_searchFragment"
+        app:destination="@id/booking" />
+
+    <fragment
+        android:id="@+id/bookingListFragment"
+        android:name="com.ganeo.appli.zentrip.fragment.BookingListFragment"
+        android:label="@string/bookings"
+        tools:layout="@layout/booking_list_fragment"></fragment>
+    <navigation
+        android:id="@+id/booking"
+        app:startDestination="@id/BookingFragment">
+        <fragment
+            android:id="@+id/BookingFragment"
+            android:name="com.ganeo.appli.zentrip.fragment.BookingFragment"
+            android:label="@string/title_home"
+            tools:layout="@layout/booking_fragment">
+            <action
+                android:id="@+id/action_BookingFragment_to_bookingCarFragment"
+                app:destination="@id/bookingCarFragment"
+                app:popUpTo="@+id/BookingFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/bookingCarFragment"
+            android:name="com.ganeo.appli.zentrip.fragment.BookingCarFragment"
+            android:label="Select Car">
+            <action
+                android:id="@+id/action_bookingCarFragment_to_bookingDriverFragment"
+                app:destination="@id/bookingDriverFragment"
+                app:popUpTo="@+id/BookingFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/bookingDriverFragment"
+            android:name="com.ganeo.appli.zentrip.fragment.BookingDriverFragment"
+            android:label="Select Driver" />
+    </navigation>
+
+</navigation>

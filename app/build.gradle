@@ -1,0 +1,136 @@
+apply plugin: 'com.android.application'
+apply plugin: "androidx.navigation.safeargs"
+
+// Composants de la version d'application : <major>.<minor>.<patch>
+def versionMajor = 1
+def versionMinor = 0
+def versionPatch = 0
+
+def appVersionCode = versionMajor * 1000000 + versionMinor * 1000 + versionPatch
+def appVersionName = "${versionMajor}.${versionMinor}.${versionPatch}"
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
+    defaultConfig {
+        applicationId "org.ganeo.appli.hta"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 2
+        versionName '2.0'
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
+        resValue 'string', 'app_info', "Version ${appVersionName}"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [
+                        "androidManifestFile": "$projectDir/src/main/AndroidManifest.xml".toString()
+                ]
+            }
+        }
+
+    }
+
+    dataBinding {
+        enabled = true
+    }
+    buildTypes {
+
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    configurations.all {
+        resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
+    }
+    packagingOptions {
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/notice.txt'
+    }
+
+    flavorDimensions "environnement"
+    productFlavors {
+        dev {
+            buildConfigField 'String', 'HOST', "\"http://192.168.1.28:8080/\""
+        }
+        prod {
+            buildConfigField 'String', 'HOST', "\"http://ec2-52-47-156-99.eu-west-3.compute.amazonaws.com:8088/\""
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-alpha1'
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.1.1-alpha01', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    implementation 'com.google.android.material:material:1.1.0-alpha01'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'joda-time:joda-time:2.9.7'
+
+    implementation 'com.jakewharton:butterknife:7.0.1'
+    annotationProcessor 'com.jakewharton:butterknife:7.0.1'
+    androidTestImplementation 'junit:junit:4.12'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation('com.squareup.retrofit2:adapter-rxjava:2.3.0') {
+        exclude group: 'com.squareup.retrofit2', module: 'retrofit'
+    }
+    implementation('com.squareup.okhttp3:logging-interceptor:3.8.0') {
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+    }
+    implementation 'com.jakewharton.timber:timber:4.6.0'
+
+    implementation 'pub.devrel:easypermissions:2.0.0'
+
+
+    implementation 'com.applandeo:material-calendar-view:1.4.0'
+
+    annotationProcessor "org.androidannotations:androidannotations:4.4.0"
+    implementation "org.androidannotations:androidannotations-api:4.4.0"
+
+
+    implementation 'com.google.firebase:firebase-core:16.0.5'
+    implementation 'com.google.firebase:firebase-messaging:17.3.4'
+
+    // Dagger
+    annotationProcessor "com.google.dagger:dagger-android-processor:2.16"
+    annotationProcessor "com.google.dagger:dagger-compiler:2.16"
+    implementation "com.google.dagger:dagger:2.16"
+    implementation "com.google.dagger:dagger-android:2.16"
+    implementation "com.google.dagger:dagger-android-support:2.16"
+
+    def room_version = "2.1.0-alpha02"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version" // use kapt for Kotlin
+
+    def lifecycle_version = "2.0.0"
+    // ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+    // use kapt for Kotlin
+
+    def paging_version = "2.1.0-beta01"
+    implementation "androidx.paging:paging-runtime:$paging_version"
+
+    def nav_version = "1.0.0-alpha09"
+    implementation "android.arch.navigation:navigation-fragment:$nav_version"
+    implementation "android.arch.navigation:navigation-ui:$nav_version"
+
+
+    implementation "com.github.psinetron:slycalendarview:0.0.9"
+
+}

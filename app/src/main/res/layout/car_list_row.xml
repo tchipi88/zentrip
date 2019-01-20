@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="4dp"
+    android:padding="10dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/quickcontact"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="18dp"
+        android:src="@drawable/ic_directions_car_black_24dp" />
+
+    <TextView
+        android:id="@+id/model"
+        style="@style/TextCardViewBold"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/quickcontact"
+        android:text="Model" />
+
+    <TextView
+        android:id="@+id/marque"
+        style="@style/TextCardView"
+        android:layout_below="@+id/model"
+        android:layout_toRightOf="@+id/quickcontact"
+        android:text="Marque" />
+
+
+</RelativeLayout>
+
