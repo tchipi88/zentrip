@@ -21,7 +21,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
   Widget _buildImage(String assetName) {
     return Align(
-      child: Image.asset('assets/$assetName.jpg', width: 350.0),
+      child: Image.asset('assets/images/$assetName.jpg', width: 350.0),
       alignment: Alignment.bottomCenter,
     );
   }
@@ -87,7 +87,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
             children: const [
               Text("Click on ", style: bodyStyle),
               Icon(Icons.edit),
-              Text(" to edit a post", style: bodyStyle),
+              Text(" to edit a pages.post", style: bodyStyle),
             ],
           ),
           image: _buildImage('img1'),

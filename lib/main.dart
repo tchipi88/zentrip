@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_splashscreen/simple_splashscreen.dart';
 
-import 'OnBoardingPage.dart';
-import 'SplashScreen.dart';
+import 'constant/Color.dart';
+import 'pages/OnBoardingPage.dart';
+import 'pages/SplashScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,7 +17,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Zentrip Application',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: kBackgroundColor,
+        textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
+        primaryColor: kPrimaryColor,
+        accentColor: kPrimaryColor,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MyAppWidget(),
     );
