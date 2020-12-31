@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_splashscreen/simple_splashscreen.dart';
+import 'package:zentrip/routes.dart';
 
 import 'constant/Color.dart';
 import 'pages/OnBoardingPage.dart';
@@ -17,13 +18,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Zentrip Application',
       theme: ThemeData(
-        scaffoldBackgroundColor: kBackgroundColor,
+        scaffoldBackgroundColor: Colors.white,
         textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
         primaryColor: kPrimaryColor,
         accentColor: kPrimaryColor,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        appBarTheme: AppBarTheme(color: Colors.white, elevation: 0),
+        fontFamily: 'Ubuntu',
       ),
       home: MyAppWidget(),
+      routes:routes,
     );
   }
 }

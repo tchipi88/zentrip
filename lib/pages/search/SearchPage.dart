@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:zentrip/constant/TextStyle.dart';
-import 'package:zentrip/helper/data.dart';
 import 'package:zentrip/model/CategorieModel.dart';
 import 'package:zentrip/utils/app_utils.dart';
 import 'package:zentrip/widgets/MyWidgets.dart';

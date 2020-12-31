@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:zentrip/constant/Color.dart';
 
 class CategoryCard extends StatelessWidget {
   final String imageAssetUrl, categoryName;
@@ -61,5 +62,6 @@ AppBar buildAppBar(String title){
     centerTitle: true,
     elevation: 0.0,
     automaticallyImplyLeading: false,
+    backgroundColor: kPrimaryColor,
   );
 }
