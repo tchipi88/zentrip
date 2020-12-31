@@ -21,6 +21,7 @@ class _AccountDetailState extends State<AccountDetailPage> {
   AppBar buildAppBar() {
     return AppBar(
       backgroundColor: kPrimaryColor,
+      automaticallyImplyLeading: true,
       leading: SizedBox(),
       // On Android it's false by default
       centerTitle: true,

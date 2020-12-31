@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zentrip/constant/Color.dart';
+import 'package:zentrip/model/message_model.dart';
+import 'package:zentrip/pages/chat/MessagePage.dart';
 import 'package:zentrip/widgets/ChatListViewItem.dart';
 import 'package:zentrip/widgets/Loading.dart';
 import 'package:zentrip/widgets/MyWidgets.dart';
@@ -8,6 +10,7 @@ class ListMessage extends StatefulWidget {
   @override
   _ListMessageState createState() => _ListMessageState();
 }
+
 class _ListMessageState extends State<ListMessage> {
   bool isLoading = true;
 
@@ -27,90 +30,141 @@ class _ListMessageState extends State<ListMessage> {
     if (isLoading == true) {
       return Loading();
     } else {
-      return  Container(
+      return Container(
         child: Scaffold(
           backgroundColor: kPrimaryColor,
-          appBar:buildAppBar('Chats'),
+          appBar: buildAppBar('Chats'),
           body: Container(
             child: Container(
-              decoration: BoxDecoration(
-                color:backGround,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15.0),
-                  topRight: Radius.circular(15.0),
-                ),
-              ),
-              child: ListView(
-                children: <Widget>[
-                  ChatListViewItem(
-                    hasUnreadMessage: true,
-                    image: AssetImage('assets/images/person1.jpg'),
-                    lastMessage:
-                    "Lorem ipsum dolor sit amet. Sed pharetra ante a blandit ultrices.",
-                    name: "Bree Jarvis",
-                    newMesssageCount: 8,
-                    time: "19:27 PM",
-                  ),
-                  ChatListViewItem(
-                    hasUnreadMessage: true,
-                    image: AssetImage('assets/images/person2.png'),
-                    lastMessage:
-                    "Lorem ipsum dolor sit amet. Sed pharetra ante a blandit ultrices.",
-                    name: "Alex",
-                    newMesssageCount: 5,
-                    time: "19:27 PM",
-                  ),
-                  ChatListViewItem(
-                    hasUnreadMessage: false,
-                    image: AssetImage('assets/images/person3.jpg'),
-                    lastMessage:
-                    "Lorem ipsum dolor sit amet. Sed pharetra ante a blandit ultrices.",
-                    name: "Carson Sinclair",
-                    newMesssageCount: 0,
-                    time: "19:27 PM",
-                  ),
-                  ChatListViewItem(
-                    hasUnreadMessage: false,
-                    image: AssetImage('assets/images/person4.png'),
-                    lastMessage:
-                    "Lorem ipsum dolor sit amet. Sed pharetra ante a blandit ultrices.",
-                    name: "Lucian Guerra",
-                    newMesssageCount: 0,
-                    time: "19:27 PM",
-                  ),
-                  ChatListViewItem(
-                    hasUnreadMessage: false,
-                    image: AssetImage('assets/images/person5.jpg'),
-                    lastMessage:
-                    "Lorem ipsum dolor sit amet. Sed pharetra ante a blandit ultrices.",
-                    name: "Sophia-Rose Bush",
-                    newMesssageCount: 0,
-                    time: "19:27 PM",
-                  ),
-                  ChatListViewItem(
-                    hasUnreadMessage: false,
-                    image: AssetImage('assets/images/person6.jpg'),
-                    lastMessage:
-                    "Lorem ipsum dolor sit amet. Sed pharetra ante a blandit ultrices.",
-                    name: "Mohammad",
-                    newMesssageCount: 0,
-                    time: "19:27 PM",
-                  ),
-                  ChatListViewItem(
-                    hasUnreadMessage: false,
-                    image: AssetImage('assets/images/person7.jpg'),
-                    lastMessage:
-                    "Lorem ipsum dolor sit amet. Sed pharetra ante a blandit ultrices.",
-                    name: "Jimi Cooke",
-                    newMesssageCount: 0,
-                    time: "19:27 PM",
-                  ),
-                ],
-              ),
+              decoration:  buildBoxDecoration(),
+              child: RecentChats(),
             ),
           ),
         ),
       );
     }
-    }
   }
+}
+
+class RecentChats extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30.0),
+            topRight: Radius.circular(30.0),
+          ),
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30.0),
+            topRight: Radius.circular(30.0),
+          ),
+          child: ListView.builder(
+            itemCount: chats.length,
+            itemBuilder: (BuildContext context, int index) {
+              final Message chat = chats[index];
+              return GestureDetector(
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => MessagePage(
+                      user: chat.sender,
+                    ),
+                  ),
+                ),
+                child: Container(
+                  margin: EdgeInsets.only(top: 5.0, bottom: 5.0, right: 20.0),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                  decoration: BoxDecoration(
+                    color: chat.unread ? Color(0xFFFFEFEE) : Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(20.0),
+                      bottomRight: Radius.circular(20.0),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          CircleAvatar(
+                            radius: 35.0,
+                            backgroundImage: AssetImage(chat.sender.imageUrl),
+                          ),
+                          SizedBox(width: 10.0),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                chat.sender.name,
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(height: 5.0),
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.45,
+                                child: Text(
+                                  chat.text,
+                                  style: TextStyle(
+                                    color: Colors.blueGrey,
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: <Widget>[
+                          Text(
+                            chat.time,
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 5.0),
+                          chat.unread
+                              ? Container(
+                                  width: 40.0,
+                                  height: 20.0,
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context).primaryColor,
+                                    borderRadius: BorderRadius.circular(30.0),
+                                  ),
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    'NEW',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                )
+                              : Text(''),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:zentrip/model/CategorieModel.dart';
+import 'package:zentrip/pages/MyHomePage.dart';
 import 'package:zentrip/pages/account/AccountPage.dart';
-import 'package:zentrip/pages/search/MySearch.dart';
+import 'package:zentrip/pages/search/ListSearch.dart';
+import 'package:zentrip/pages/search/SearchAndFavorite.dart';
 import 'package:zentrip/utils/SizeConfig.dart';
 import 'package:zentrip/widgets/CategorieList.dart';
 import 'package:zentrip/widgets/SearchBox.dart';
@@ -34,8 +36,8 @@ class _HomePageState extends State<HomePage> {
         body: IndexedStack(
           index: _currentIndex,
           children: [
-            Body(),
-            MySearch(),
+            MyHomePage(),
+            SearchAndFavorite(),
             ListMessage(),
             AccountPage()
           ],

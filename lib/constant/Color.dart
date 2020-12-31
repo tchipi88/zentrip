@@ -8,6 +8,7 @@ const Color imgBG = Color.fromRGBO(230, 230, 254, 1);
 // list of colors that we use in our app
 const kBackgroundColor = Color(0xFFF1EFF1);
 const kPrimaryColor = Color(0xFF035AA6);
+const kAccentColor = Color(0xFFFEF9EB);
 const kSecondaryColor = Color(0xFFFFA41B);
 const kTextColor = Color(0xFF000839);
 const kTextLightColor = Color(0xFF747474);

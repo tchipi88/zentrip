@@ -1,195 +1,178 @@
 import 'package:flutter/material.dart';
 import 'package:zentrip/constant/Color.dart';
+import 'package:zentrip/model/message_model.dart';
+import 'package:zentrip/model/user_model.dart';
 import 'package:zentrip/widgets/ReceivedMessageWidget.dart';
 import 'package:zentrip/widgets/SendedMessageWidget.dart';
 
 class MessagePage extends StatefulWidget {
-  final String username;
+  final User user;
 
-  const MessagePage({
-    Key key,
-    this.username,
-  }) : super(key: key);
+  MessagePage({this.user});
 
   @override
   _MessagePageState createState() => _MessagePageState();
 }
 
 class _MessagePageState extends State<MessagePage> {
-  TextEditingController _text = new TextEditingController();
-  ScrollController _scrollController = ScrollController();
-  var childList = <Widget>[];
 
-  @override
-  void initState() {
-    super.initState();
-    childList.add(Align(
-        alignment: Alignment(0, 0),
-        child: Container(
-          margin: const EdgeInsets.only(top: 5.0),
-          height: 25,
-          width: 50,
-          decoration: BoxDecoration(
-              color: Colors.black12,
-              borderRadius: BorderRadius.all(
-                Radius.circular(8.0),
-              )),
-          child: Center(
-              child: Text(
-                "Today",
-                style: TextStyle(fontSize: 11),
-              )),
-        )));
-    childList.add(Align(
-      alignment: Alignment(1, 0),
-      child: SendedMessageWidget(
-        content: 'Hello',
-        time: '21:36 PM',
-        isImage: false,
-      ),
-    ));
-    childList.add(Align(
-      alignment: Alignment(1, 0),
-      child: SendedMessageWidget(
-        content: 'How are you? What are you doing?',
-        time: '21:36 PM',
-        isImage: false,
-      ),
-    ));
-    childList.add(Align(
-      alignment: Alignment(-1, 0),
-      child: ReceivedMessageWidget(
-        content: 'Hello, Mohammad.I am fine. How are you?',
-        time: '22:40 PM',
-        isImage: false,
-      ),
-    ));
-    childList.add(Align(
-      alignment: Alignment(1, 0),
-      child: SendedMessageWidget(
-        content:
-        'I am good. Can you do something for me? I need your help my bro.',
-        time: '22:40 PM',
-        isImage: false,
-      ),
-    ));
-    childList.add(Align(
-      alignment: Alignment(-1, 0),
-      child: ReceivedMessageWidget(
-        content: 'this is fun 😂',
-        time: '22:57 PM',
-        isImage: true,
-        imageAddress: 'assets/images/fun.jpg',
-      ),
-    ));
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          child: Stack(
-            fit: StackFit.loose,
-            children: <Widget>[
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                // mainAxisAlignment: MainAxisAlignment.start,
-                // mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  SizedBox(
-                    height: 65,
-                    child: Container(
-                      color:  kPrimaryColor,
-                      child: Row(
-                        children: <Widget>[
-                          IconButton(
-                            icon: Icon(
-                              Icons.arrow_back,
-                              color: Colors.white,
-                            ),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                          ),
-                          Spacer(),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                widget.username ?? "Jimi Cooke",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 15),
-                              )
-                            ],
-                          ),
-                          Spacer(),
-
-                        ],
-                      ),
-                    ),
-                  ),
-                  Divider(
-                    height: 0,
-                    color: Colors.black54,
-                  ),
-                  Flexible(
-                    fit: FlexFit.tight,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage(
-                                "assets/images/chat-background-1.jpg"),
-                            fit: BoxFit.cover,
-                            colorFilter: ColorFilter.linearToSrgbGamma()),
-                      ),
-                      child: SingleChildScrollView(
-                          controller: _scrollController,
-                          // reverse: true,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: childList,
-                          )),
-                    ),
-                  ),
-                  Divider(height: 0, color: Colors.black26),
-                  Container(
-                    height: 50,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: TextField(
-                        maxLines: 20,
-                        controller: _text,
-                        decoration: InputDecoration(
-                          suffixIcon: Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              IconButton(
-                                icon: Icon(Icons.send),
-                                onPressed: () {},
-                              ),
-                              IconButton(
-                                icon: Icon(Icons.image),
-                                onPressed: () {},
-                              ),
-                            ],
-                          ),
-                          border: InputBorder.none,
-                          hintText: "enter your message",
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+      backgroundColor: kPrimaryColor,
+      appBar: AppBar(
+        title: Text(
+          widget.user.name,
         ),
+        elevation: 0.0,
+        automaticallyImplyLeading: true,
+        backgroundColor: kPrimaryColor,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.more_horiz),
+            iconSize: 30.0,
+            color: Colors.white,
+            onPressed: () {},
+          ),
+        ],
+      ),
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30.0),
+                    topRight: Radius.circular(30.0),
+                  ),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30.0),
+                    topRight: Radius.circular(30.0),
+                  ),
+                  child: ListView.builder(
+                    reverse: true,
+                    padding: EdgeInsets.only(top: 15.0),
+                    itemCount: messages.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final Message message = messages[index];
+                      final bool isMe = message.sender.id == currentUser.id;
+                      return _buildMessage(message, isMe);
+                    },
+                  ),
+                ),
+              ),
+            ),
+            _buildMessageComposer(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _buildMessage(Message message, bool isMe) {
+    final Container msg = Container(
+      margin: isMe
+          ? EdgeInsets.only(
+        top: 8.0,
+        bottom: 8.0,
+        left: 80.0,
+      )
+          : EdgeInsets.only(
+        top: 8.0,
+        bottom: 8.0,
+      ),
+      padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+      width: MediaQuery.of(context).size.width * 0.75,
+      decoration: BoxDecoration(
+        color: isMe ? Theme.of(context).accentColor : Color(0xFFFFEFEE),
+        borderRadius: isMe
+            ? BorderRadius.only(
+          topLeft: Radius.circular(15.0),
+          bottomLeft: Radius.circular(15.0),
+        )
+            : BorderRadius.only(
+          topRight: Radius.circular(15.0),
+          bottomRight: Radius.circular(15.0),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            message.time,
+            style: TextStyle(
+              color: Colors.blueGrey,
+              fontSize: 16.0,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          SizedBox(height: 8.0),
+          Text(
+            message.text,
+            style: TextStyle(
+              color: Colors.blueGrey,
+              fontSize: 16.0,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
+    );
+    if (isMe) {
+      return msg;
+    }
+    return Row(
+      children: <Widget>[
+        msg,
+        IconButton(
+          icon: message.isLiked
+              ? Icon(Icons.favorite)
+              : Icon(Icons.favorite_border),
+          iconSize: 30.0,
+          color: message.isLiked
+              ? Theme.of(context).primaryColor
+              : Colors.blueGrey,
+          onPressed: () {},
+        )
+      ],
+    );
+  }
+
+  _buildMessageComposer() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 8.0),
+      height: 70.0,
+      color: Colors.white,
+      child: Row(
+        children: <Widget>[
+          IconButton(
+            icon: Icon(Icons.photo),
+            iconSize: 25.0,
+            color: Theme.of(context).primaryColor,
+            onPressed: () {},
+          ),
+          Expanded(
+            child: TextField(
+              textCapitalization: TextCapitalization.sentences,
+              onChanged: (value) {},
+              decoration: InputDecoration.collapsed(
+                hintText: 'Send a message...',
+              ),
+            ),
+          ),
+          IconButton(
+            icon: Icon(Icons.send),
+            iconSize: 25.0,
+            color: Theme.of(context).primaryColor,
+            onPressed: () {},
+          ),
+        ],
       ),
     );
   }

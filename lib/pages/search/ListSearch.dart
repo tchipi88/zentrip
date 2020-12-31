@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:zentrip/constant/Color.dart';
 import 'package:zentrip/widgets/MyWidgets.dart';
 
-class MySearch extends StatefulWidget {
+class ListSearch extends StatefulWidget {
   @override
-  _MySearchState createState() => _MySearchState();
+  _ListSearchState createState() => _ListSearchState();
 }
-class _MySearchState extends State<MySearch> {
+class _ListSearchState extends State<ListSearch> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kPrimaryColor,
-      appBar: buildAppBar('MySearch'),
+      appBar: buildAppBar('ListSearch'),
       body: Center(
-        child: Text('MySearch Screen !'),
+        child: Text('ListSearch Screen !'),
       ),
     );
   }

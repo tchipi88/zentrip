@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:zentrip/widgets/DefaultButton.dart';
 
 import 'HomePage.dart';
 
@@ -65,18 +66,11 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           title: "Another title page",
           body: "Another beautiful body text for this example onboarding",
           image: _buildImage('img2'),
-          footer: RaisedButton(
-            onPressed: () {
+          footer: DefaultButton(
+            press: () {
               introKey.currentState?.animateScroll(0);
             },
-            child: const Text(
-              'FooButton',
-              style: TextStyle(color: Colors.white),
-            ),
-            color: Colors.lightBlue,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0),
-            ),
+              text: "Continue",
           ),
           decoration: pageDecoration,
         ),

@@ -16,7 +16,7 @@ class CategorieList extends StatelessWidget {
     return Column(
       children: [
         SectionTitle(
-          title: "Right Now At Spark",
+          title: "Top Categories",
           press: () {},
         ),
         VerticalSpacing(of: 20),

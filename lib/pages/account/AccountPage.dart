@@ -11,27 +11,24 @@ class AccountPage extends StatefulWidget {
   @override
   _AccountState createState() => _AccountState();
 }
+
 class _AccountState extends State<AccountPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: buildAppBar(),
-      body: Body()
+    return Container(
+        child:Scaffold(
+        backgroundColor: kPrimaryColor,
+        appBar: buildAppBar('Account'),
+        body: Container(
+          child: Container(
+            decoration: buildBoxDecoration(),
+            child: Body(),
+          ),
+        )
+    )
     );
   }
 }
-
-AppBar buildAppBar() {
-  return AppBar(
-    backgroundColor: kPrimaryColor,
-    leading: SizedBox(),
-    // On Android it's false by default
-    centerTitle: true,
-    title: Text("Account"),
-
-  );
-}
-
 
 class Body extends StatelessWidget {
   @override
@@ -39,17 +36,26 @@ class Body extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          ProfilePic(
-            image: "assets/images/Profile Image.png",
-            name: "Jhon Doe",
-            email: "Jhondoe01@gmail.com",
-          ),
-          SizedBox(height: SizeConfig.defaultSize * 2), //20
+          Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Card(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    const ListTile(
+                      leading: Icon(Icons.account_circle, size: 50,color: kPrimaryColor,),
+                      title: Text('Heart Shaker'),
+                      subtitle: Text('TWICE'),
+                    ),
+                  ],
+                ),
+              )),
           MenuItem(
             text: "My Account",
             icon: "assets/icons/User Icon.svg",
-            press: ()  {
-             //Todo Navigator.pushNamed(context, SignInPage.routeName);
+            press: () {
+              //Todo Navigator.pushNamed(context, SignInPage.routeName);
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -63,20 +69,24 @@ class Body extends StatelessWidget {
             icon: "assets/icons/Bell.svg",
             press: () {},
           ),
-          MenuItem(
-            text: "Settings",
-            icon: "assets/icons/Settings.svg",
-            press: () {},
-          ),
-          MenuItem(
-            text: "Help Center",
-            icon: "assets/icons/Question mark.svg",
-            press: () {},
-          ),
-          MenuItem(
-            text: "Log Out",
-            icon: "assets/icons/Log out.svg",
-            press: () {},
+          Card(
+            child: Column(children: [
+              MenuItem(
+                text: "Settings",
+                icon: "assets/icons/Settings.svg",
+                press: () {},
+              ),
+              MenuItem(
+                text: "Help Center",
+                icon: "assets/icons/Question mark.svg",
+                press: () {},
+              ),
+              MenuItem(
+                text: "Log Out",
+                icon: "assets/icons/Log out.svg",
+                press: () {},
+              ),
+            ]),
           ),
         ],
       ),
