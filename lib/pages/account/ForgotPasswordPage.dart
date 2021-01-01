@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:zentrip/constant/Color.dart';
 import 'package:zentrip/constant/TextStyle.dart';
 import 'package:zentrip/utils/SizeConfig.dart';
 import 'package:zentrip/widgets/CustomSurffixIcon.dart';
 import 'package:zentrip/widgets/DefaultButton.dart';
 import 'package:zentrip/widgets/FormError.dart';
+import 'package:zentrip/widgets/MyWidgets.dart';
 import 'package:zentrip/widgets/NoAccountText.dart';
 
 class ForgotPasswordPage extends StatelessWidget {
@@ -12,11 +14,15 @@ class ForgotPasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Forgot Password"),
-      ),
-      body: Body(),
-    );
+        backgroundColor: kPrimaryColor,
+        appBar: buildAppBar('Forgot Password'),
+        body: Container(
+          child: Container(
+            height: double.infinity, // <-----
+            decoration: buildBoxDecoration(),
+            child: Body(),
+          ),
+        ));
   }
 }
 

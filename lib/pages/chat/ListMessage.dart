@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:zentrip/constant/Color.dart';
 import 'package:zentrip/model/message_model.dart';
 import 'package:zentrip/pages/chat/MessagePage.dart';
-import 'package:zentrip/widgets/ChatListViewItem.dart';
 import 'package:zentrip/widgets/Loading.dart';
 import 'package:zentrip/widgets/MyWidgets.dart';
 
@@ -49,7 +48,7 @@ class _ListMessageState extends State<ListMessage> {
 class RecentChats extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return Container(
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,

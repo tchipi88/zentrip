@@ -15,9 +15,15 @@ class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar('Sign In'),
-      body: Body(),
-    );
+        backgroundColor: kPrimaryColor,
+        appBar: buildAppBar('Sign In'),
+        body: Container(
+          child: Container(
+            height: double.infinity, // <-----
+            decoration: buildBoxDecoration(),
+            child: Body(),
+          ),
+        ));
   }
 }
 

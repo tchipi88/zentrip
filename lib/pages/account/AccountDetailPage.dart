@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:zentrip/constant/Color.dart';
+import 'package:zentrip/pages/sign_in/SignInPage.dart';
 import 'package:zentrip/utils/SizeConfig.dart';
 import 'package:zentrip/widgets/MenuItem.dart';
-import 'package:zentrip/widgets/MyWidgets.dart';
 import 'package:zentrip/widgets/ProfilePic.dart';
 
 class AccountDetailPage extends StatefulWidget {
@@ -57,14 +57,10 @@ class Body extends StatelessWidget {
           SizedBox(height: SizeConfig.defaultSize * 2), //20
           MenuItem(
             icon: "assets/icons/bookmark_fill.svg",
-            text: "Saved Recipes",
+            text: "Complete Profil",
             press: () {},
           ),
-          MenuItem(
-            icon: "assets/icons/chef_color.svg",
-            text: "Super Plan",
-            press: () {},
-          ),
+
           MenuItem(
             icon: "assets/icons/language.svg",
             text: "Change Language",
@@ -72,8 +68,20 @@ class Body extends StatelessWidget {
           ),
           MenuItem(
             icon: "assets/icons/info.svg",
-            text: "Help",
+            text: "Change Password",
             press: () {},
+          ),
+          MenuItem(
+            text: "Log Out",
+            icon: "assets/icons/Log out.svg",
+            press: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SignInPage(),
+                ),
+              );
+            },
           ),
         ],
       ),

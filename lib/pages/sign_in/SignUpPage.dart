@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:zentrip/constant/Color.dart';
 import 'package:zentrip/constant/TextStyle.dart';
 import 'package:zentrip/pages/account/CompleteProfilePage.dart';
 import 'package:zentrip/utils/SizeConfig.dart';
 import 'package:zentrip/widgets/CustomSurffixIcon.dart';
 import 'package:zentrip/widgets/DefaultButton.dart';
 import 'package:zentrip/widgets/FormError.dart';
+import 'package:zentrip/widgets/MyWidgets.dart';
 import 'package:zentrip/widgets/SocalCard.dart';
 
 class SignUpPage extends StatelessWidget {
@@ -12,11 +14,15 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Sign Up"),
-      ),
-      body: Body(),
-    );
+        backgroundColor: kPrimaryColor,
+        appBar: buildAppBar('Sign Up'),
+        body: Container(
+          child: Container(
+            height: double.infinity, // <-----
+            decoration: buildBoxDecoration(),
+            child: Body(),
+          ),
+        ));
   }
 }
 

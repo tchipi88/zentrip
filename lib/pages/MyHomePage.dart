@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:zentrip/constant/Color.dart';
-import 'package:zentrip/utils/SizeConfig.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:zentrip/widgets/CategorieList.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -10,80 +8,79 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-  final TextEditingController _filter = new TextEditingController();
-
-  List<String> itemList = [];
-
-  @override
-  void initState() {
-
-    for(int count = 0; count < 50; count++)
-    {
-      itemList.add("Item $count");
-    }
-  }
+  int _selectedIndex = 0;
+  List<IconData> _icons = [
+    FontAwesomeIcons.suitcaseRolling,
+    FontAwesomeIcons.car,
+    FontAwesomeIcons.building,
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxScrolled) {
-            return <Widget>[
-              createSilverAppBar()
-            ];
-          },
-          body:  Column(
-            children: [
-              VerticalSpacing(),
-              CategorieList(),
-              VerticalSpacing(),
-              CategorieList(),
-            ],
-          )
-      ),
-    );
-  }
-
-  SliverAppBar createSilverAppBar() {
-    return SliverAppBar(
-      title: Text('Home'),
-      expandedHeight: 200,
-      floating: false,
-      pinned: true,
-      automaticallyImplyLeading: false,
-      flexibleSpace: FlexibleSpaceBar(
-          titlePadding: EdgeInsets.only(bottom: 15),
-          centerTitle: true,
-          title: Container(
-            padding: EdgeInsets.only(bottom: 2),
-            constraints:
-            BoxConstraints(minHeight: 40, maxHeight: 40),
-            width: 220,
-            child: CupertinoTextField(
-              controller: _filter,
-              keyboardType: TextInputType.text,
-              placeholder: "Search..",
-              placeholderStyle: TextStyle(
-                color: Color(0xffC4C6CC),
-                fontSize: 14.0,
-                fontFamily: 'Brutal',
-              ),
-              prefix: Padding(
-                padding:
-                const EdgeInsets.fromLTRB(9.0, 6.0, 9.0, 6.0),
-                child: Icon(Icons.search, ),
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.0),
-                color: Colors.white,
-              ),
+      body: Container(
+        child: Container(
+          child: SafeArea(
+            child: ListView(
+              padding: EdgeInsets.symmetric(vertical: 30.0),
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(left: 20.0, right: 120.0),
+                  child: Text(
+                    'What would you like to find?',
+                    style: TextStyle(
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: _icons
+                      .asMap()
+                      .entries
+                      .map(
+                        (MapEntry map) => _buildIcon(map.key),
+                      )
+                      .toList(),
+                ),
+                SizedBox(height: 20.0),
+                CategorieList(),
+                SizedBox(height: 20.0),
+                CategorieList(),
+              ],
             ),
-          ) ,
+          ),
+        ),
       ),
-      backgroundColor: kPrimaryColor,
     );
   }
 
-
+  Widget _buildIcon(int index) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _selectedIndex = index;
+        });
+      },
+      child: Container(
+        height: 60.0,
+        width: 60.0,
+        decoration: BoxDecoration(
+          color: _selectedIndex == index
+              ? Theme.of(context).accentColor
+              : Color(0xFFE7EBEE),
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+        child: Icon(
+          _icons[index],
+          size: 25.0,
+          color: _selectedIndex == index
+              ? Theme.of(context).primaryColor
+              : Color(0xFFB4C1C4),
+        ),
+      ),
+    );
+  }
 }
