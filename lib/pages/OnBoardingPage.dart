@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:zentrip/utils/SharedPrefs.dart';
 import 'package:zentrip/widgets/DefaultButton.dart';
 
 import 'HomePage.dart';
@@ -18,6 +19,11 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
     Navigator.of(context).push(
       MaterialPageRoute(builder: (_) => HomePage()),
     );
+  }
+
+  @override
+  void initState() {
+    sharedPrefs.setFirstLaunch(true);
   }
 
   Widget _buildImage(String assetName) {

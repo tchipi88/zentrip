@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_splashscreen/simple_splashscreen.dart';
+import 'package:zentrip/pages/HomePage.dart';
 import 'package:zentrip/routes.dart';
+import 'package:zentrip/utils/SharedPrefs.dart';
 
 import 'constant/Color.dart';
 import 'pages/OnBoardingPage.dart';
 import 'pages/SplashScreen.dart';
 
-void main() {
-  runApp(MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await sharedPrefs.init();
+  runApp(
+    MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -41,7 +47,7 @@ class _MyAppState extends State<MyAppWidget> {
   Widget build(BuildContext context) {
     return Simple_splashscreen(
       context: context,
-      gotoWidget: OnBoardingPage(),
+      gotoWidget: sharedPrefs.isfirstLaunch ? OnBoardingPage() : HomePage(),
       splashscreenWidget: SplashScreen(),
       timerInSeconds: 5,
     );
