@@ -7,8 +7,14 @@ import 'package:zentrip/widgets/DefaultButton.dart';
 import 'package:zentrip/widgets/FormError.dart';
 import 'package:zentrip/widgets/MyWidgets.dart';
 
-class CompleteProfilePage extends StatelessWidget {
+class CompleteProfilePage extends StatefulWidget {
   static String routeName = "/complete_profile";
+
+  @override
+  _CompleteProfilePageState createState() => _CompleteProfilePageState();
+}
+
+class _CompleteProfilePageState extends State<CompleteProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +38,7 @@ class Body extends StatelessWidget {
         width: double.infinity,
         child: Padding(
           padding:
-          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+              EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
           child: SingleChildScrollView(
             child: Column(
               children: [
