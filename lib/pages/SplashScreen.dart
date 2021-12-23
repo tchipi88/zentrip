@@ -29,13 +29,6 @@ class _SplashScreenState extends State<SplashScreen> {
     });
   }
 
-  Widget _infoTile(String title, String subtitle) {
-    return ListTile(
-      title: Text(title),
-      subtitle: Text(subtitle ?? 'Not set'),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     // You have to call it on your starting screen

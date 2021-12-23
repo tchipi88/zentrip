@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:zentrip/model/CategorieModel.dart';
+import 'package:zentrip/pages/MyHomePage.dart';
 import 'package:zentrip/pages/account/AccountPage.dart';
 import 'package:zentrip/pages/favorite/ListFavorite.dart';
-import 'package:zentrip/pages/search/SearchPage.dart';
 import 'package:zentrip/widgets/bottom_navigation_bar.dart';
 
 import 'chat/ListMessage.dart';
@@ -18,6 +18,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    super.initState();
     categories = getCategories();
   }
   @override
@@ -30,7 +31,7 @@ class _HomePageState extends State<HomePage> {
         body: IndexedStack(
           index: _currentIndex,
           children: [
-            SearchPage(),
+            MyHomePage(),
             ListFavorite(),
             ListMessage(),
             AccountPage()
